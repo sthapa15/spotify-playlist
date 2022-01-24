@@ -13,21 +13,25 @@ const Spotify = {
     const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
 
     if (accessTokenMatch && expiresInMatch) {
+      console.log("if");
       accessToken = accessTokenMatch[1];
       const expiresIn = Number(expiresInMatch[1]);
-
+      console.log(expiresIn);
       //clears parameters allowing access to new token when it expires
       window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
-      window.history.pushState("Access Token", null, "/");
-
+      // Don't need this, idk why its here.
+      //   window.history.pushState("Access Token", null, "/");
       return accessToken;
     } else {
+      console.log("elsese");
       const accessUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`;
       window.location = accessUrl;
     }
   },
   async search(term) {
+    console.log("testsetset");
     const accessToken = Spotify.getAccessToken();
+
     console.log(accessToken);
     const response = await fetch(
       `https://api.spotify.com/v1/search?type=track&q=${term}`,

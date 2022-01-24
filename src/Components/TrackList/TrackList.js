@@ -14,6 +14,9 @@ class TrackList extends React.Component {
               onAdd={this.props.onAdd}
               onRemove={this.props.onRemove}
               isRemoval={this.props.isRemoval}
+              imgUrl={track.art[0].url}
+              imgWidth={track.art[0].width}
+              imgHeight={track.art[0].height}
             />
           );
         })}
